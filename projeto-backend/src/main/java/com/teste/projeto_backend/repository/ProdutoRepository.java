@@ -41,4 +41,33 @@ public class ProdutoRepository {
         produtos.add(produto);
         return produto;
     }
+
+    /**
+     * Metodo para deletar o produto por id.
+     * @param id do produto a ser deletado
+     *
+     */
+    public void deletar(Integer id){
+        produtos.removeIf(produto -> produto.getId() == id);
+    }
+
+    /**
+     * Atualiza um produto existente na lista.
+     *
+     * @param produto produto com os dados atualizados
+     * @return produto atualizado
+     * @throws InputMismatchException se o produto com o ID especificado não for encontrado
+     */
+    public Produto atualizar(Produto produto){
+        optional<Produto> produtoExistente = obterPorId(produto.getId());
+
+        if(produtoEncontrado.isEmpty()){
+            throw new InputMismatchException("Produto com ID " + produto.getId() + " não encontrado.");
+        }
+
+        deletar(produto.getId());
+        produtos.add(produto);
+        return produto;
+    }
+       
 }
