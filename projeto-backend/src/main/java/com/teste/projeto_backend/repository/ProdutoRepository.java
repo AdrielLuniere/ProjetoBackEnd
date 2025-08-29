@@ -1,14 +1,16 @@
 package com.teste.projeto_backend.repository;
 
-import java.util.Arraylist;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.InputMismatchException;
 import com.teste.projeto_backend.model.Produto;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class ProdutoRepository {
 
-    private List<Produto> produtos = new Arraylist<Produto>();
+    private List<Produto> produtos = new ArrayList<Produto>();
     private Integer ultimoId = 0;
 
     /**
@@ -24,11 +26,12 @@ public class ProdutoRepository {
      * Retorna o produto com o ID especificado.
      *
      * @param id ID do produto a ser obtido
-     * @return produto com o ID especificado, ou null se não encontrado
+     * @return Optional contendo o produto, ou vazio se não encontrado
      */
-    public Produto obterPorId(Integer id){
-        return produtos.stream().filter(produto -> produto.getId() ==id).findFirst();
+    public Optional<Produto> obterPorId(Integer id){
+        return produtos.stream().filter(produto -> produto.getId() == id).findFirst();
     }
+
     /**
      * Adiciona um novo produto à lista.
      *
@@ -59,9 +62,9 @@ public class ProdutoRepository {
      * @throws InputMismatchException se o produto com o ID especificado não for encontrado
      */
     public Produto atualizar(Produto produto){
-        optional<Produto> produtoExistente = obterPorId(produto.getId());
+        Optional<Produto> produtoExistente = obterPorId(produto.getId());
 
-        if(produtoEncontrado.isEmpty()){
+        if(produtoExistente.isEmpty()){
             throw new InputMismatchException("Produto com ID " + produto.getId() + " não encontrado.");
         }
 

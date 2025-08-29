@@ -8,3 +8,5 @@ Produto: id, nome, quantidade, valor, observacao
 Repositorio de produto: ok
     obterTodos, obterPorId, adicionar, atualizar, deletar.
 
+Serviço de produto: ok
+    obterTodos, obterPorId, adicionar, atualizar, deletar.
