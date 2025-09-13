@@ -23,7 +23,7 @@ public class ProdutoController {
 
     @GetMapping
     public List<Produto> obterTodos() {
-        return produtoService.obterTodos();
+        return produtoService.obterTodos(); 
     }
 
     @GetMapping("/{id}")
@@ -46,4 +46,5 @@ public class ProdutoController {
     public Produto atualizar(@RequestBody Produto produto, @PathVariable Integer id) {
         return produtoService.atualizar(id, produto);
     }
+
 }
